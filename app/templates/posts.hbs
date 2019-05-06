@@ -1,1 +1,35 @@
-{{outlet}}
+<h1 class="pb-6">Posts</h1>
+
+<div>
+    {{outlet}}
+</div>
+
+<ul class="list-reset pb-6">
+    {{#each this.model as |post|}}
+        <li class="pb-2">{{post.title}}</li>
+    {{/each}}
+</ul>
+
+<div class="inline-flex float-left">
+    <button class="pr-4 disabled">Per Page: </button>
+    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
+        {{#link-to "posts" (query-params size="10")}}10{{/link-to}}
+    </button>
+    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4">
+        {{#link-to "posts" (query-params size="20")}}20{{/link-to}}
+    </button>
+    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
+        {{#link-to "posts" (query-params size="30")}}30{{/link-to}}
+    </button>
+</div>
+<div class="inline-flex">
+
+</div>
+<div class="inline-flex float-right">
+    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
+        {{#link-to "posts" (query-params page=this.previous)}}Previous{{/link-to}}
+    </button>
+    <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
+        {{#link-to "posts" (query-params page=this.next)}}Next{{/link-to}}
+    </button>
+</div>

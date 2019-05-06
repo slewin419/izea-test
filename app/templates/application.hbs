@@ -1,5 +1,16 @@
-<div id="app-container" class="container mx-auto">
-    <h1>Izea Front End Test</h1>
+<nav class="flex items-center justify-between flex-wrap bg-teal p-6">
+    <div class="flex items-center flex-no-shrink text-white mr-6">
+        <h1>Izea Front End Tests</h1>
+    </div>
+    <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+        <div class="text-sm lg:flex-grow">
+            {{#link-to "posts" class="block mt-4 lg:inline-block lg:mt-0 no-underline text-blue-dark hover:text-white mr-4"}}
+                Posts
+            {{/link-to}}
+        </div>
+    </div>
+</nav>
+<div id="app-container" class="container mx-auto pt-6">
     {{outlet}}
 </div>
 
