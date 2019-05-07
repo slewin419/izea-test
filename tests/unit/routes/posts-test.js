@@ -8,4 +8,6 @@ module('Unit | Route | posts', function(hooks) {
     let route = this.owner.lookup('route:posts');
     assert.ok(route);
   });
+  
+  test()
 });

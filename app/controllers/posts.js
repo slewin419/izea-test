@@ -16,7 +16,7 @@ export default Controller.extend({
     }),
     posts: Ember.inject.service(),
     actions: {
-        getPostDetails(postId){
+	getPostDetails(postId){
             var _self = this;
             this.get('posts').request('/posts/' + postId)
                 .then(function(post){

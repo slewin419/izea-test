@@ -9,4 +9,9 @@ module('Unit | Service | posts', function(hooks) {
     let service = this.owner.lookup('service:posts');
     assert.ok(service);
   });
+    
+  test('it exists', function(assert) {
+      let service = this.owner.lookup('service:posts');
+      assert.ok(service);
+  });
 });

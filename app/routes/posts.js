@@ -12,7 +12,6 @@ export default Route.extend({
         }
     },
     model(params) {
-        //debugger;
         return this.get('posts').request('/posts', {
             data: {
                 _start: params.size * (--params.page),
