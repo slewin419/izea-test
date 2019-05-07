@@ -1,39 +1,66 @@
 <h1 class="pb-6">Posts</h1>
 
-<div>
-    {{outlet}}
+<div class="flex">
+    <div class="w-3/4">
+        <ul class="list-reset pb-6">
+            {{#each this.model as |post|}}
+            <li {{action "getPostDetails" post.id}} class="p-3 border border-black bg-blue-light capitalize font-light
+                       hover:bg-blue hover:text-white rounded cursor-pointer">
+                {{post.title}}
+            </li>
+            {{/each}}
+        </ul>
+        <div class="pagination-controls flex justify-between">
+            <div class="inline-flex ml-3">
+                <button class="pr-4 disabled">Per Page: </button>
+                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l">
+                    {{#link-to "posts" (query-params size="8") class="text-white"}}8{{/link-to}}
+                </button>
+                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4">
+                    {{#link-to "posts" (query-params size="16") class="text-white"}}16{{/link-to}}
+                </button>
+                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                    {{#link-to "posts" (query-params size="24") class="text-white"}}24{{/link-to}}
+                </button>
+            </div>
+            <div>
+                <button class="bg-indigo text-white font-bold py-2 px-4 rounded">
+                    Page: {{this.page}}
+                </button>
+            </div>
+            <div class="inline-flex mr-3">
+                {{#if this.previous}}
+                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l">
+                        {{#link-to "posts" (query-params page=this.previous) class="text-white"}}Previous{{/link-to}}
+                    </button>
+                {{else}}
+                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l cursor-not-allowed">
+                        Previous
+                    </button>
+                {{/if}}
+
+                {{#if this.hasNext}}
+                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                        {{#link-to "posts" (query-params page=this.next) class="text-white"}}Next{{/link-to}}
+                    </button>
+                {{else}}
+                    <button class="cursor-not-allowed bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                        Next
+                    </button>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="w-1/4">
+        <div class="slider bg-yellow-light fixed w-1/4 ml-6 p-6 h-screen pin-t pin-r">
+            <h2 class="text-center mb-6">Details</h2>
+            {{#if currentPost }}
+                <p class="break-words font-bold pb-3">{{currentPost.title}}</p>
+                <p class="pb-3">{{currentPost.body}}</p>
+                <p class="font-bold">{{currentUser.name}} &lt;{{currentUser.email}}&gt;</p>
+                <p>Phone: {{currentUser.phone}}</p>
+            {{/if}}
+        </div>
+    </div>
 </div>
 
-<ul class="list-reset pb-6">
-    {{#each this.model as |post|}}
-        <li class="pb-2">{{post.title}}</li>
-    {{/each}}
-</ul>
-
-<div class="pagination-controls flex justify-between">
-    <div class="inline-flex ml-3">
-        <button class="pr-4 disabled">Per Page: </button>
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
-            {{#link-to "posts" (query-params size="10")}}10{{/link-to}}
-        </button>
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4">
-            {{#link-to "posts" (query-params size="20")}}20{{/link-to}}
-        </button>
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
-            {{#link-to "posts" (query-params size="30")}}30{{/link-to}}
-        </button>
-    </div>
-    <div>
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded">
-            Page: {{this.page}}
-        </button>
-    </div>
-    <div class="inline-flex mr-3">
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-l">
-            {{#link-to "posts" (query-params page=this.previous)}}Previous{{/link-to}}
-        </button>
-        <button class="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
-            {{#link-to "posts" (query-params page=this.next)}}Next{{/link-to}}
-        </button>
-    </div>
-</div>
