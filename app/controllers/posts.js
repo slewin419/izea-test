@@ -27,6 +27,9 @@ export default Controller.extend({
                     _self.get('posts').request('/users/' + userId)
                         .then(user => _self.set('currentUser', user));
                 });
+        },
+        deleteCurrentUser() {
+            this.set('currentPost', null);
         }
     }
 });

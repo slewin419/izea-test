@@ -2,49 +2,48 @@
 
 <div class="flex">
     <div class="w-3/4">
-        <ul class="list-reset pb-6">
+        <ul class="list-reset pb-20">
             {{#each this.model as |post|}}
-            <li {{action "getPostDetails" post.id}} class="p-3 border border-black bg-blue-light capitalize font-light
-                       hover:bg-blue hover:text-white rounded cursor-pointer">
+            <li {{action "getPostDetails" post.id}} class="post p-3 border border-black capitalize font-light rounded cursor-pointer">
                 {{post.title}}
             </li>
             {{/each}}
         </ul>
         <div class="pagination-controls flex justify-between">
             <div class="inline-flex ml-3">
-                <button class="pr-4 disabled">Per Page: </button>
-                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l">
+                <button class="pl-4 pr-4 disabled rounded-l">Per Page: </button>
+                <button class="font-bold py-2 px-4">
                     {{#link-to "posts" (query-params size="8") class="text-white"}}8{{/link-to}}
                 </button>
-                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4">
+                <button class="font-bold py-2 px-4">
                     {{#link-to "posts" (query-params size="16") class="text-white"}}16{{/link-to}}
                 </button>
-                <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                <button class="font-bold py-2 px-4 rounded-r">
                     {{#link-to "posts" (query-params size="24") class="text-white"}}24{{/link-to}}
                 </button>
             </div>
             <div>
-                <button class="bg-indigo text-white font-bold py-2 px-4 rounded">
+                <button class="text-white font-bold rounded">
                     Page: {{this.page}}
                 </button>
             </div>
             <div class="inline-flex mr-3">
                 {{#if this.previous}}
-                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l">
+                    <button class="font-bold py-2 px-4 rounded-l">
                         {{#link-to "posts" (query-params page=this.previous) class="text-white"}}Previous{{/link-to}}
                     </button>
                 {{else}}
-                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-l cursor-not-allowed">
+                    <button class="font-bold py-2 px-4 rounded-l cursor-not-allowed">
                         Previous
                     </button>
                 {{/if}}
 
                 {{#if this.hasNext}}
-                    <button class="bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                    <button class="text-grey font-bold py-2 px-4 rounded-r">
                         {{#link-to "posts" (query-params page=this.next) class="text-white"}}Next{{/link-to}}
                     </button>
                 {{else}}
-                    <button class="cursor-not-allowed bg-indigo hover:bg-indigo-dark text-grey font-bold py-2 px-4 rounded-r">
+                    <button class="cursor-not-allowed text-grey font-bold py-2 px-4 rounded-r">
                         Next
                     </button>
                 {{/if}}
@@ -52,14 +51,15 @@
         </div>
     </div>
     <div class="w-1/4">
-        <div class="slider bg-yellow-light fixed w-1/4 ml-6 p-6 h-screen pin-t pin-r">
-            <h2 class="text-center mb-6">Details</h2>
+        <div id="slider" class="{{if this.currentPost "open" "closed"}} bg-yellow-light fixed w-1/4 ml-6 p-6 h-screen pin-t pin-r">
+            <h1 class="text-center mb-6">Details</h1>
             {{#if currentPost }}
-                <p class="break-words font-bold pb-3">{{currentPost.title}}</p>
-                <p class="pb-3">{{currentPost.body}}</p>
-                <p class="font-bold">{{currentUser.name}} &lt;{{currentUser.email}}&gt;</p>
-                <p>Phone: {{currentUser.phone}}</p>
+                <h2 class="break-words font-bold pb-6 capitalize text-2xl">{{currentPost.title}}</h2>
+                <p class="pb-6 text-3xl">{{currentPost.body}}</p>
+                <p class="font-bold text-2xl break-words pb-6">{{currentUser.name}} &lt;{{currentUser.email}}&gt;</p>
+                <p class="font-bold text-2xl">Phone: {{currentUser.phone}}</p>
             {{/if}}
+            <button {{action "deleteCurrentUser"}} class="rounded mt-6 ">Close</button>
         </div>
     </div>
 </div>
