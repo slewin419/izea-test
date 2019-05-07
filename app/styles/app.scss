@@ -28437,7 +28437,8 @@ nav{
   background-color: $teal;
 }
 
-li.post {
+a.post {
+  display: block;
   background-color: $gold;
   color: black;
 

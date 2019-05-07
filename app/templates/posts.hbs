@@ -4,9 +4,9 @@
     <div class="w-3/4">
         <ul class="list-reset pb-20">
             {{#each this.model as |post|}}
-            <li {{action "getPostDetails" post.id}} class="post p-3 border border-black capitalize font-light rounded cursor-pointer">
-                {{post.title}}
-            </li>
+                <a {{action "getPostDetails" post.id}} href="#" class="post p-3 border border-black capitalize font-light rounded cursor-pointer">
+                    {{post.title}}
+                </a>
             {{/each}}
         </ul>
         <div class="pagination-controls flex justify-between">
@@ -59,7 +59,7 @@
                 <p class="font-bold text-2xl break-words pb-6">{{currentUser.name}} &lt;{{currentUser.email}}&gt;</p>
                 <p class="font-bold text-2xl">Phone: {{currentUser.phone}}</p>
             {{/if}}
-            <button {{action "deleteCurrentUser"}} class="rounded mt-6 ">Close</button>
+            <button {{action "deleteCurrentPost"}} class="rounded mt-6 ">Close</button>
         </div>
     </div>
 </div>

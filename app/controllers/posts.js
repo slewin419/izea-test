@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { computed } from '@ember/object';
+import {inject as service} from '@ember/service';
 
 export default Controller.extend({
     queryParams: ['page', 'size'],
@@ -14,7 +15,7 @@ export default Controller.extend({
     hasNext: computed('model.hasNext', function(){
         return this.model.length === this.size;
     }),
-    posts: Ember.inject.service(),
+    posts: service(),
     actions: {
 	getPostDetails(postId){
             var _self = this;
@@ -28,7 +29,7 @@ export default Controller.extend({
                         .then(user => _self.set('currentUser', user));
                 });
         },
-        deleteCurrentUser() {
+        deleteCurrentPost() {
             this.set('currentPost', null);
         }
     }

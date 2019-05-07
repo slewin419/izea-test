@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
@@ -10,32 +11,32 @@ module('Unit | Controller | posts', function(hooks) {
     assert.ok(controller);
   });
   
-  test('should remove currentUser on deleteCurrentUser action', function(assert){
+  test('should remove currentPost on deleteCurrentPost action', function(assert){
     assert.expect(2);
     
     let controller = this.owner.lookup('controller:posts');
-    var user = {id: 1, name: test};
+    var post = {id: 1, title: 'test', body: 'text'};
     
-    controller.set('currentUser', user);
+    controller.set('currentPost', post);
     
-    assert.equal(controller.get('currentUser'), user);
+    assert.equal(controller.get('currentPost'), post);
     
-    controller.send('deleteCurrentUser');
+    controller.send('deleteCurrentPost');
     
-    assert.equal(controller.get('currentUser'), null);
+    assert.equal(controller.get('currentPost'), null);
   });
   
+  //Cannot figure out how to run asynchronous test :/
   test('should set currentUser and currentPost on getPostDetails action', function(assert){
-      assert.expect(4);
+      assert.expect(2);
       
       let controller = this.owner.lookup('controller:posts');
-    
-      assert.equal(controller.get('currentUser'), undefined);
-      assert.equal(controller.get('currentPost'), undefined);
       
-      controller.send('getPostDetails', 1);
-    
-      assert.equal(controller.get('currentUser').length, 1);
-      assert.equal(controller.get('currentPost').length, 1);
+      Ember.run(function(){
+	  controller.send('getPostDetails', '1');
+   
+	  assert.equal(controller.get('currentUser').id, 1);
+	  assert.equal(controller.get('currentPost').id, 1);
+      });
   });
 });
